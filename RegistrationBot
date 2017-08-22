@@ -1,0 +1,161 @@
+import telebot
+from telebot import types
+
+token = "373695817:AAF-h-bAEng6S7AJ-e3MgJjSAmws1ejFV68"
+bot = telebot.TeleBot(token)
+
+
+@bot.message_handler(commands=['start', 'help'])
+def send_welcome(message):
+        keyboard = types.InlineKeyboardMarkup()
+        button1 = types.InlineKeyboardButton(text="Open Space", callback_data="auditory")
+        button2 = types.InlineKeyboardButton(text="Переговорка", callback_data="booking_room")
+        keyboard.add(button1)
+        keyboard.add(button2)
+        bot.send_message(message.chat.id, "Выберите нужную вам функцию", reply_markup=keyboard)
+
+
+
+
+
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback_inline(call):
+    keyboard = types.InlineKeyboardMarkup()
+    button_01 = types.InlineKeyboardButton(text="9.00 - 10.00", callback_data = "b1")
+    button_02 = types.InlineKeyboardButton(text="10.00 - 11.00", callback_data = "b2")
+    button_03 = types.InlineKeyboardButton(text="11.00 - 12.00", callback_data = "b3")
+    button_04 = types.InlineKeyboardButton(text="12.00 - 13.00", callback_data = "b4")
+    button_05 = types.InlineKeyboardButton(text="13.00 - 14.00", callback_data = "b5")
+    button_06 = types.InlineKeyboardButton(text="14.00 - 15.00", callback_data = "b6")
+    button_07 = types.InlineKeyboardButton(text="15.00 - 16.00", callback_data = "b7")
+    button_08 = types.InlineKeyboardButton(text="16.00 - 17.00", callback_data = "b8")
+    button_09 = types.InlineKeyboardButton(text="17.00 - 18.00", callback_data = "b9")
+    button_10 = types.InlineKeyboardButton(text="18.00 - 19.00", callback_data = "b10")
+    button_11 = types.InlineKeyboardButton(text="19.00 - 20.00", callback_data = "b11")
+    button_12 = types.InlineKeyboardButton(text="20.00 - 21.00", callback_data = "b12")
+    keyboard.add(button_01)
+    keyboard.add(button_02)
+    keyboard.add(button_03)
+    keyboard.add(button_04)
+    keyboard.add(button_05)
+    keyboard.add(button_06)
+    keyboard.add(button_07)
+    keyboard.add(button_08)
+    keyboard.add(button_09)
+    keyboard.add(button_10)
+    keyboard.add(button_11)
+    keyboard.add(button_12)
+ 
+    if call.message:
+        if call.data == "auditory":
+            bot.send_message(call.message.chat.id, "Выберите подходящее время" , reply_markup = keyboard)
+
+        if call.data == "b1":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 9.00 - 10.00 (OpenSpace)")
+        if call.data == "b2":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 10.00 - 11.00 (OpenSpace)")
+        if call.data == "b3":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 11.00 - 12.00 (OpenSpace)")
+        if call.data == "b4":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 12.00 - 13.00 (OpenSpace)")
+        if call.data == "b5":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 13.00 - 14.00 (OpenSpace)")
+        if call.data == "b6":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 14.00 - 15.00 (OpenSpace)")
+        if call.data == "b7":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 15.00 - 16.00 (OpenSpace)")
+        if call.data == "b8":
+            bot.edit_message_text(chat_id=call.messag
+ e.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 16.00 - 17.00 (OpenSpace)")
+        if call.data == "b9":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 17.00 - 18.00 (OpenSpace)")
+        if call.data == "b10":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 18.00 - 19.00 (OpenSpace)")
+        if call.data == "b11":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 19.00 - 20.00 (OpenSpace)")
+        if call.data == "b12":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 20.00 - 21.00 (OpenSpace)")
+            
+            
+
+    if call.data == "booking_room":
+        bot.send_message(call.message.chat.id, "Выберите подходящее время" , reply_markup = keyboard)
+
+        if call.data == "b1":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 9.00 - 10.00 (Переговорка)")
+        if call.data == "b2":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 10.00 - 11.00 (Переговорка)")
+        if call.data == "b3":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 11.00 - 12.00 (Переговорка)")
+        if call.data == "b4":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 12.00 - 13.00 (Переговорка)")
+        if call.data == "b5":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 13.00 - 14.00 (Переговорка)")
+        if call.data == "b6":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 14.00 - 15.00 (Переговорка)")
+        if call.data == "b7":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 15.00 - 16.00 (Переговорка)")
+        if call.data == "b8":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 16.00 - 17.00 (Переговорка)")
+        if call.data == "b9":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 17.00 - 18.00 (Переговорка)")
+        if call.data == "b10":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 18.00 - 19.00 (Переговорка)")
+        if call.data == "b11":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 19.00 - 20.00 (Переговорка)")
+ if call.data == "b12":
+            bot.edit_message_text(chat_id=call.message.chat.id,
+                                  message_id=call.message.message_id,
+                                  text="Вы выбрали время 20.00 - 21.00 (Переговорка)")
+            
+
+            
+                     
+bot.polling(none_stop=True)
