@@ -1,0 +1,60 @@
+import random
+import uuid
+
+import telebot
+from PIL import Image
+
+token = "446892695:AAEgS1j-ubebRFvPFJEYiyPTyYRkcbyHq88"
+
+bot = telebot.TeleBot(token=token)
+def process(path_to_file):
+    img = Image.open(path_to_file)
+    goto = Image.open("goto.jpg").convert("RGBA")
+    goto = goto.resize((img.width, img.height))
+    goto = goto.resize((goto.width//4, goto.height//4))
+    pixels1 = goto.load()
+    width = goto.width // 50
+    height = goto.height // 50
+    print(width, height)
+    for x in range(goto.width):
+        for y in range(goto.height):
+              r, g, b, tr = pixels1[x, y]
+              a = (r+g+b)//3
+              if a > 215:
+                    pixels1[x, y] = (r, g, b, 120)
+              else:
+                   pixels1[x, y] = (r, g, b, tr)
+    img.paste(goto, (0,0), goto)
+    img.save(path_to_file)
+
+
+
+@bot.message_handler(content_types=['photo'])
+def message_handler(message):
+    # скачивание файла
+    file_id = message.photo[-1].file_id
+    path = bot.get_file(file_id)
+    downloaded_file = bot.download_file(path.file_path)
+
+    # узнаешь расширение и придумываем имя
+    extn = '.' + str(path.file_path).split('.')[-1] # .jpg
+    filename = str(uuid.uuid4()) + extn
+    path_to_file = "images/" + filename
+    print(path_to_file)
+
+    # создаем файл и записываем туда данные
+    with open(path_to_file, 'wb') as new_file:
+        new_file.write(downloaded_file)
+
+    # применяем фильтр
+    process(path_to_file)
+
+    # открываем файл и отправляем его пользователю
+    with open(path_to_file, 'rb') as new_file:
+        bot.send_photo(message.chat.id, new_file.read())
+
+
+
+
+
+bot.polling(none_stop=True)
