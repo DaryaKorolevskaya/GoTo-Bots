@@ -1,1 +1,1 @@
-# RegistrationBot
+Телеграмм боты для смены в GotoCamp(август 2017). GoToFirmPuctures - бот для того, чтобы добавить лого Goto на фотографию. RegistrationBot - бот для регистрации посетителей в коворкинг.
